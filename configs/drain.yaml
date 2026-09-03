@@ -1,0 +1,12 @@
+# Drain baseline settings for SecOps-2k. Same parameter style as
+# TMFNK/LogParser-Harness configs/drain.yaml; tuned once for this
+# syslog-shaped file and then pinned. Do not retune per run.
+datasets:
+  SecOps:
+    log_format: '<Month> <Day> <Time> <Host> <Process>(\[<Pid>\])?: <Content>'
+    regex:
+      - '(\d+\.){3}\d+'
+      - '([\w-]+\.){2,}[\w-]+'
+    st: 0.5
+    depth: 4
+    max_children: 100

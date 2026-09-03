@@ -1,0 +1,42 @@
+cff-version: 1.2.0
+message: Cite this dataset if you evaluate log parsers on it.
+title: SecOps-2k
+version: 0.1.0
+date-released: "2026-09-03"
+license: Apache-2.0
+repository-code: https://github.com/TMFNK/LogParser-Dataset
+url: https://github.com/TMFNK/LogParser-Dataset
+authors:
+  - name: TMFNK
+    website: https://github.com/TMFNK
+    affiliation: MbitAI
+  - name: MbitAI
+    website: https://www.mbitai.com
+abstract: >
+  SecOps-2k: 2,000 fully synthetic security/operations log lines
+  (sshd, sudo, firewall, audit) with template annotations in LogHub
+  format, shipped with tight and loose grouping variants, a seeded
+  generator, and a Drain baseline scored with GA/PA/FGA/FTA.
+keywords:
+  - log-parsing
+  - log-dataset
+  - intrusion-detection
+  - sshd
+  - benchmark
+  - synthetic-data
+  - reproducibility
+references:
+  - type: article
+    title: "A Large-scale Evaluation for Log Parsing Techniques: How Far are We?"
+    authors:
+      - family-names: Jiang
+        given-names: Zhihan
+    year: 2024
+    url: https://arxiv.org/abs/2308.10828
+  - type: article
+    title: "LogHub: A Large Collection of System Log Datasets for AI-driven Log Analytics"
+    authors:
+      - family-names: Zhu
+        given-names: Jieming
+    year: 2023
+    url: https://arxiv.org/abs/2008.06448

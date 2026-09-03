@@ -1,0 +1,36 @@
+# env / caches (re-creatable)
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+logs/*.log
+
+# LLM settings & secrets — NEVER commit
+.env
+.env.*
+*.pem
+*.key
+configs/*local*
+configs/*override*
+
+# model weights in any format (never commit)
+*.gguf
+*.bin
+*.safetensors
+*.pt
+*.pth
+*.onnx
+*.ckpt
+
+# Drain dumps (recreated each run). Hashes and scores are pinned in expected/.
+results/raw/
+*.pid
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# NOTE: dataset/ (*.log, *_structured*.csv) IS committed on purpose.
+# The data is the artifact. It is small (2k lines) and fully synthetic.

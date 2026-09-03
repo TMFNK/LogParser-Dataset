@@ -1,0 +1,182 @@
+# SecOps-2k template registry. Single source of truth for the generator.
+# seed: 42 | n_lines: 2000 | weights sum to 100 (percent-like shares)
+# Field pools live in scripts/generate.py; only documentation
+# ranges (RFC 5737) and RFC 1918 addresses are ever emitted.
+seed: 42
+n_lines: 2000
+templates:
+  - id: S01
+    process: sshd
+    pattern: "Failed password for {user} from {src_ip} port {port} ssh2"
+    template: "Failed password for <*> from <*> port <*> ssh2"
+    params: [user, src_ip, port]
+    weight: 18.0
+    loose: L_AUTH_FAIL
+  - id: S02
+    process: sshd
+    pattern: "Failed password for invalid user {user} from {src_ip} port {port} ssh2"
+    template: "Failed password for invalid user <*> from <*> port <*> ssh2"
+    params: [user, src_ip, port]
+    weight: 12.0
+    loose: L_AUTH_FAIL
+  - id: S03
+    process: sshd
+    pattern: "Accepted password for {user} from {src_ip} port {port} ssh2"
+    template: "Accepted password for <*> from <*> port <*> ssh2"
+    params: [user, src_ip, port]
+    weight: 2.0
+    loose: L_AUTH_OK
+  - id: S04
+    process: sshd
+    pattern: "Accepted publickey for {user} from {src_ip} port {port} ssh2"
+    template: "Accepted publickey for <*> from <*> port <*> ssh2"
+    params: [user, src_ip, port]
+    weight: 2.0
+    loose: L_AUTH_OK
+  - id: S05
+    process: sshd
+    pattern: "Invalid user {user} from {src_ip} port {port}"
+    template: "Invalid user <*> from <*> port <*>"
+    params: [user, src_ip, port]
+    weight: 6.0
+    loose: L_PROBE
+  - id: S06
+    process: sshd
+    pattern: "Disconnected from authenticating user {user} {src_ip} port {port} [preauth]"
+    template: "Disconnected from authenticating user <*> <*> port <*> [preauth]"
+    params: [user, src_ip, port]
+    weight: 5.0
+    loose: L_SESS_END
+  - id: S07
+    process: sshd
+    pattern: "Connection closed by authenticating user {user} {src_ip} port {port} [preauth]"
+    template: "Connection closed by authenticating user <*> <*> port <*> [preauth]"
+    params: [user, src_ip, port]
+    weight: 5.0
+    loose: L_SESS_END
+  - id: S08
+    process: sshd
+    pattern: "pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost={src_ip}"
+    template: "pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=<*>"
+    params: [src_ip]
+    weight: 8.0
+    loose: L_AUTH_FAIL
+  - id: S09
+    process: sshd
+    pattern: "pam_unix(sshd:auth): check pass; user unknown"
+    template: "pam_unix(sshd:auth): check pass; user unknown"
+    params: []
+    weight: 3.0
+    loose: L_AUTH_FAIL
+  - id: S10
+    process: sshd
+    pattern: "Received disconnect from {src_ip} port {port}:11: disconnected by user [preauth]"
+    template: "Received disconnect from <*> port <*>:11: disconnected by user [preauth]"
+    params: [src_ip, port]
+    weight: 4.0
+    loose: L_SESS_END
+  - id: S11
+    process: sshd
+    pattern: "reverse mapping checking getaddrinfo for {dns} [{src_ip}] failed - POSSIBLE BREAK-IN ATTEMPT!"
+    template: "reverse mapping checking getaddrinfo for <*> [<*>] failed - POSSIBLE BREAK-IN ATTEMPT!"
+    params: [dns, src_ip]
+    weight: 1.0
+    loose: L_INTRUSION
+  - id: S12
+    process: sshd
+    pattern: "input_userauth_request: invalid user {user} [preauth]"
+    template: "input_userauth_request: invalid user <*> [preauth]"
+    params: [user]
+    weight: 3.0
+    loose: L_PROBE
+  - id: S13
+    process: sshd
+    pattern: "error: maximum authentication attempts exceeded for {user} from {src_ip} port {port} ssh2 [preauth]"
+    template: "error: maximum authentication attempts exceeded for <*> from <*> port <*> ssh2 [preauth]"
+    params: [user, src_ip, port]
+    weight: 1.0
+    loose: L_AUTH_FAIL
+  - id: S14
+    process: sshd
+    pattern: "Connection reset by {src_ip} port {port} [preauth]"
+    template: "Connection reset by <*> port <*> [preauth]"
+    params: [src_ip, port]
+    weight: 2.0
+    loose: L_SESS_END
+  - id: U01
+    process: sudo
+    pattern: "pam_unix(sudo:session): session opened for user {target} by {user}(uid={uid})"
+    template: "pam_unix(sudo:session): session opened for user <*> by <*>(uid=<*>)"
+    params: [target, user, uid]
+    weight: 4.0
+    loose: L_SUDO_OK
+  - id: U02
+    process: sudo
+    pattern: "pam_unix(sudo:session): session closed for user {target}"
+    template: "pam_unix(sudo:session): session closed for user <*>"
+    params: [target]
+    weight: 4.0
+    loose: L_SUDO_OK
+  - id: U03
+    process: sudo
+    pattern: "{user} : user NOT authorized on host ; TTY={tty} ; PWD={path} ; COMMAND={cmd}"
+    template: "<*> : user NOT authorized on host ; TTY=<*> ; PWD=<*> ; COMMAND=<*>"
+    params: [user, tty, path, cmd]
+    weight: 1.5
+    loose: L_SUDO_DENY
+  - id: U04
+    process: sudo
+    pattern: "{user} : {tries} incorrect password attempts ; TTY={tty} ; PWD={path} ; COMMAND={cmd}"
+    template: "<*> : <*> incorrect password attempts ; TTY=<*> ; PWD=<*> ; COMMAND=<*>"
+    params: [user, tries, tty, path, cmd]
+    weight: 1.5
+    loose: L_SUDO_DENY
+  - id: U05
+    process: sudo
+    pattern: "{user} : command not allowed with sudo ; TTY={tty} ; PWD={path} ; COMMAND={cmd}"
+    template: "<*> : command not allowed with sudo ; TTY=<*> ; PWD=<*> ; COMMAND=<*>"
+    params: [user, tty, path, cmd]
+    weight: 1.0
+    loose: L_SUDO_DENY
+  - id: F01
+    process: kernel
+    pattern: "[UFW BLOCK] IN={iface} OUT= SRC={src_ip} DST={dst_ip} PROTO=TCP SPT={port} DPT={dport}"
+    template: "[UFW BLOCK] IN=<*> OUT= SRC=<*> DST=<*> PROTO=TCP SPT=<*> DPT=<*>"
+    params: [iface, src_ip, dst_ip, port, dport]
+    weight: 6.0
+    loose: L_FW_BLOCK
+  - id: F02
+    process: kernel
+    pattern: "[UFW BLOCK] IN={iface} OUT= SRC={src_ip} DST={dst_ip} PROTO=UDP SPT={port} DPT={dport}"
+    template: "[UFW BLOCK] IN=<*> OUT= SRC=<*> DST=<*> PROTO=UDP SPT=<*> DPT=<*>"
+    params: [iface, src_ip, dst_ip, port, dport]
+    weight: 3.0
+    loose: L_FW_BLOCK
+  - id: F03
+    process: kernel
+    pattern: "[UFW ALLOW] IN={iface} OUT= SRC={src_ip} DST={dst_ip} PROTO=TCP SPT={port} DPT={dport}"
+    template: "[UFW ALLOW] IN=<*> OUT= SRC=<*> DST=<*> PROTO=TCP SPT=<*> DPT=<*>"
+    params: [iface, src_ip, dst_ip, port, dport]
+    weight: 2.0
+    loose: L_FW_ALLOW
+  - id: F04
+    process: kernel
+    pattern: "[UFW BLOCK] IN={iface} OUT= SRC={src_ip} DST={dst_ip} PROTO=ICMP TYPE={itype} CODE={icode}"
+    template: "[UFW BLOCK] IN=<*> OUT= SRC=<*> DST=<*> PROTO=ICMP TYPE=<*> CODE=<*>"
+    params: [iface, src_ip, dst_ip, itype, icode]
+    weight: 1.0
+    loose: L_FW_BLOCK
+  - id: A01
+    process: audit
+    pattern: "USER_AUTH pid={pid} uid={uid} auid={auid} user={user} exe=/usr/sbin/sshd res={result}"
+    template: "USER_AUTH pid=<*> uid=<*> auid=<*> user=<*> exe=/usr/sbin/sshd res=<*>"
+    params: [pid, uid, auid, user, result]
+    weight: 2.0
+    loose: L_AUDIT
+  - id: A02
+    process: audit
+    pattern: "USER_LOGIN pid={pid} uid={uid} auid={auid} user={user} exe=/usr/sbin/sshd res={result}"
+    template: "USER_LOGIN pid=<*> uid=<*> auid=<*> user=<*> exe=/usr/sbin/sshd res=<*>"
+    params: [pid, uid, auid, user, result]
+    weight: 2.0
+    loose: L_AUDIT

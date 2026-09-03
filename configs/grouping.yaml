@@ -1,0 +1,36 @@
+# Tight -> loose grouping map for SecOps-2k. Follows the pattern of the
+# corrected LogHub re-release (Zenodo 20752471, Jun 2026): one tight
+# grouping plus one looser variant. The loose file merges grouping only —
+# EventTemplate strings are unchanged, so PA is identical and GA/FGA show
+# the grouping effect. See docs/GROUPING-RULES.md for the written rules.
+loose_groups:
+  L_AUTH_FAIL:
+    rationale: "failed authentication outcomes, regardless of which daemon line reports them"
+    tight: [S01, S02, S08, S09, S13]
+  L_AUTH_OK:
+    rationale: "successful logins, password or publickey"
+    tight: [S03, S04]
+  L_PROBE:
+    rationale: "username enumeration probes (invalid-user lines)"
+    tight: [S05, S12]
+  L_SESS_END:
+    rationale: "session teardown before authentication completes"
+    tight: [S06, S07, S10, S14]
+  L_INTRUSION:
+    rationale: "reverse-DNS break-in warning; kept separate (rare, distinct)"
+    tight: [S11]
+  L_SUDO_OK:
+    rationale: "completed sudo sessions (open/close pair)"
+    tight: [U01, U02]
+  L_SUDO_DENY:
+    rationale: "denied or failed privilege escalation"
+    tight: [U03, U04, U05]
+  L_FW_BLOCK:
+    rationale: "blocked packets, any protocol"
+    tight: [F01, F02, F04]
+  L_FW_ALLOW:
+    rationale: "allowed packets"
+    tight: [F03]
+  L_AUDIT:
+    rationale: "auditd identity events"
+    tight: [A01, A02]

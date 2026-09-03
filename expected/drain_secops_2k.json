@@ -1,0 +1,26 @@
+{
+  "parser": "drain",
+  "dataset": "SecOps_2k",
+  "n_messages": 2000,
+  "n_tight_templates": 25,
+  "n_loose_groups": 10,
+  "n_parsed_templates": 70,
+  "files": {
+    "dataset/SecOps_2k.log": "17962c20701f8f2235453ba84c8b998e73dfe2ca4ae7575c2c5e6b531867f370",
+    "dataset/SecOps_2k.log_structured.csv": "9f4698950c96c7e464832bcc844db2856a4d8c4b7d460471945606da651061cd",
+    "dataset/SecOps_2k.log_structured_loose.csv": "1fd47e75d1a7ad7b6b8f7cb59f54d6c626caa384517e8ecf31027913cbe0bbf4"
+  },
+  "tight": {
+    "GA": 0.772,
+    "PA": 0.6945,
+    "FGA": 0.2947,
+    "FTA": 0.2526
+  },
+  "loose": {
+    "GA": 0.0475,
+    "PA": 0.6945,
+    "FGA": 0.05,
+    "FTA": 0.025
+  },
+  "settings": "configs/drain.yaml SecOps (st=0.5 depth=4)"
+}
