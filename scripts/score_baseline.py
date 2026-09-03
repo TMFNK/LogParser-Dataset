@@ -104,8 +104,8 @@ def main() -> None:
         "# SecOps-2k Drain baseline",
         "",
         f"Parser: Drain (logparser3), st={settings['st']} depth={settings['depth']}.",
-        f"Wall time: {elapsed:.1f}s. Parsed templates: {scores['n_parsed_templates']} "
-        f"(truth: 25 tight / 10 loose).",
+        f"Parsed templates: {scores['n_parsed_templates']} "
+        "(truth: 25 tight / 10 loose).",
         "",
         "| Ground truth | GA | PA | FGA | FTA |",
         "|---|---|---|---|---|",

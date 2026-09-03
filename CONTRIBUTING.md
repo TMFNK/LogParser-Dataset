@@ -26,7 +26,7 @@ is usually a grouping-rule or template-registry change, not a parser tweak.
 ## Checks
 
 ```bash
-uv sync --extra dev
+uv sync --frozen --extra dev
 uv run pytest -q
 ./reproduce.sh
 ```

@@ -14,10 +14,12 @@ jobs:
         with:
           python-version: "3.12"
       - name: Sync and test
-        run: uv sync --frozen --extra dev && uv run pytest -q
+        run: uv sync --frozen --extra dev && uv run ruff check . && uv run pytest -q
       - name: Generate, validate, Drain, golden
         run: |
           uv run python scripts/generate.py
           uv run python scripts/validate.py
           uv run python scripts/score_baseline.py
           uv run python scripts/verify_golden.py
+      - name: Reject drift in committed dataset or baseline
+        run: git diff --exit-code -- dataset/ expected/ results/baseline.md

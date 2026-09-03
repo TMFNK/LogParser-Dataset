@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
-# Reproduce SecOps-2k end to end: generate, validate, Drain, golden, test.
+# Reproduce SecOps-2k end to end: generate, validate, Drain, golden, lint, test.
 set -euo pipefail
 cd "$(dirname "$0")"
 
-uv sync --extra dev
+uv sync --frozen --extra dev
 uv run python scripts/generate.py
 uv run python scripts/validate.py
 uv run python scripts/score_baseline.py
 uv run python scripts/verify_golden.py
+uv run ruff check .
 uv run pytest -q
 echo "reproduce OK — see results/baseline.md"

@@ -12,15 +12,22 @@ so we made one.
 - Nothing real inside. Only documentation and private address ranges,
   no real hosts, users, or IPs.
 
-Companion eval harness (Drain on LogHub-2k):
-https://github.com/TMFNK/LogParser-Harness
-
 Keywords: log parsing, log dataset, intrusion detection, sshd, benchmark,
 grouping accuracy, parsing accuracy, FGA, FTA, synthetic data,
 reproducibility.
 
 GitHub topics: `log-parsing` `log-dataset` `intrusion-detection`
 `benchmark` `synthetic-data` `loghub` `reproducibility` `drain`
+
+## Project pipeline
+
+- **Tier A — [LogParser-Harness](https://github.com/TMFNK/LogParser-Harness):**
+  the reproducible Drain evaluation harness for LogHub-2k and SecOps-2k.
+- **Tier B — this repository:** the synthetic SecOps-2k dataset, grouping
+  rules, and pinned Drain baseline.
+- **Tier C — [LogParser-Trail](https://github.com/TMFNK/LogParser-Trail):**
+  the deterministic-first parser, audit trail, SecOps-2k results, and
+  optional local-model review.
 
 ## One-command run
 
@@ -30,7 +37,9 @@ GitHub topics: `log-parsing` `log-dataset` `intrusion-detection`
 
 Needs Python 3.12+ and [uv](https://docs.astral.sh/uv/). Regenerates the
 dataset from the yaml seed, validates it, runs Drain, checks
-`expected/drain_secops_2k.json`, and writes `results/baseline.md`.
+`expected/drain_secops_2k.json`, lints and tests the code, and writes
+`results/baseline.md`. CI also rejects drift in the committed dataset or
+baseline after regeneration.
 
 ## What is pinned
 
@@ -107,11 +116,12 @@ variants by construction. GA and FGA show the grouping effect.
 ## Manual steps
 
 ```bash
-uv sync --extra dev
+uv sync --frozen --extra dev
 uv run python scripts/generate.py
 uv run python scripts/validate.py
 uv run python scripts/score_baseline.py
 uv run python scripts/verify_golden.py
+uv run ruff check .
 uv run pytest -q
 ```
 

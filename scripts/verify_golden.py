@@ -33,7 +33,8 @@ def main() -> None:
     expected = json.loads(Path(args.expected).read_text())
     actual_path = Path(args.actual)
     if not actual_path.exists():
-        raise SystemExit(f"missing scores {actual_path} — run scripts/score_baseline.py")
+        msg = f"missing scores {actual_path} — run scripts/score_baseline.py"
+        raise SystemExit(msg)
     actual = json.loads(actual_path.read_text())
 
     failed: list[str] = []

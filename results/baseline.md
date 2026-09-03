@@ -1,7 +1,7 @@
 # SecOps-2k Drain baseline
 
 Parser: Drain (logparser3), st=0.5 depth=4.
-Wall time: 0.2s. Parsed templates: 70 (truth: 25 tight / 10 loose).
+Parsed templates: 70 (truth: 25 tight / 10 loose).
 
 | Ground truth | GA | PA | FGA | FTA |
 |---|---|---|---|---|
