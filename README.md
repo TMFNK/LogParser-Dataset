@@ -1,5 +1,7 @@
 # LogParser-Dataset
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22341506.svg)](https://doi.org/10.5281/zenodo.22341506)
+
 SecOps-2k is 2,000 synthetic security log lines (sshd, sudo, firewall,
 auditd) with template labels in LogHub format. Parser papers all evaluate
 on LogHub infra logs. Nothing comparable exists for security telemetry,
