@@ -136,10 +136,38 @@ Apache-2.0, copyright 2026 MbitAI. See LICENSE and NOTICE.
 
 Need this applied to your own log pipelines? https://www.mbitai.com
 
-## Must-cite
+## Cite this (Zenodo)
 
-If you publish numbers on SecOps-2k, cite this dataset (see
-CITATION.cff) and the LogHub papers that defined its format and metrics:
+If you evaluate on SecOps-2k, please cite the archived release:
+
+> TMFNK & MbitAI. (2026). *SecOps-2k* (v0.1.2). Zenodo.
+> https://doi.org/10.5281/zenodo.22341506
+
+| | |
+| --- | --- |
+| This version | [10.5281/zenodo.22341506](https://doi.org/10.5281/zenodo.22341506) |
+| All versions (concept DOI) | [10.5281/zenodo.22341505](https://doi.org/10.5281/zenodo.22341505) |
+| GitHub tag | [`v0.1.2`](https://github.com/TMFNK/LogParser-Dataset/releases/tag/v0.1.2) |
+| Record | https://zenodo.org/records/22341506 |
+
+Also see [`CITATION.cff`](CITATION.cff).
+
+```bibtex
+@software{tmfnk_2026_secops_2k,
+  author       = {TMFNK and MbitAI},
+  title        = {SecOps-2k},
+  month        = sep,
+  year         = 2026,
+  publisher    = {Zenodo},
+  version      = {v0.1.2},
+  doi          = {10.5281/zenodo.22341506},
+  url          = {https://doi.org/10.5281/zenodo.22341506},
+}
+```
+
+## Must-cite (LogHub papers)
+
+Also cite the LogHub papers that defined the format and metrics:
 
 - Zhihan Jiang et al., "A Large-scale Evaluation for Log Parsing
   Techniques: How Far are We?" ISSTA, 2024.
