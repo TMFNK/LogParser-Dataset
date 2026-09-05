@@ -1,8 +1,8 @@
 cff-version: 1.2.0
 message: Cite this dataset if you evaluate log parsers on it.
 title: SecOps-2k
-version: 0.1.0
-date-released: "2026-09-03"
+version: 0.1.1
+date-released: "2026-09-05"
 license: Apache-2.0
 repository-code: https://github.com/TMFNK/LogParser-Dataset
 url: https://github.com/TMFNK/LogParser-Dataset

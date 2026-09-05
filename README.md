@@ -105,13 +105,16 @@ both become L_AUTH_FAIL, for example.
 
 Independent Apache-2.0 code (`seclog/metrics.py`, shared with
 TMFNK/LogParser-Harness). We do not copy Loghub-2.0
-`benchmark/evaluation/` (GPL-3). PA comes out identical for both
-variants by construction. GA and FGA show the grouping effect.
+`benchmark/evaluation/` (GPL-3). PA and FTA come out identical for both
+variants by construction: the loose file differs in `EventId` only, and
+both scores are computed over template strings. GA and FGA show the
+grouping effect.
 
 - **GA** — share of messages whose parsed group equals the ground-truth group
 - **PA** — share of messages whose template tokens match exactly
 - **FGA** — F1 of grouping accuracy at template level
-- **FTA** — F1 of template accuracy (group set and tokens both match)
+- **FTA** — F1 of template accuracy (messages share one ground-truth
+  template and tokens match)
 
 ## Manual steps
 

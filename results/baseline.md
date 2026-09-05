@@ -6,8 +6,9 @@ Parsed templates: 70 (truth: 25 tight / 10 loose).
 | Ground truth | GA | PA | FGA | FTA |
 |---|---|---|---|---|
 | tight (25) | 0.7720 | 0.6945 | 0.2947 | 0.2526 |
-| loose (10) | 0.0475 | 0.6945 | 0.0500 | 0.0250 |
+| loose (10) | 0.0475 | 0.6945 | 0.0500 | 0.2526 |
 
-PA is identical for both rows by construction: loose merges grouping
-only (see docs/GROUPING-RULES.md). Scores recomputed by
+PA and FTA are identical for both rows by construction: loose merges
+grouping only, and FTA is computed over template strings
+(see docs/GROUPING-RULES.md). Scores recomputed by
 `./reproduce.sh`; raw JSON in `results/raw/drain_secop_scores.json`.

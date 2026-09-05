@@ -20,7 +20,7 @@
     "GA": 0.0475,
     "PA": 0.6945,
     "FGA": 0.05,
-    "FTA": 0.025
+    "FTA": 0.2526
   },
   "settings": "configs/drain.yaml SecOps (st=0.5 depth=4)"
 }
