@@ -31,6 +31,17 @@ GitHub topics: `log-parsing` `log-dataset` `intrusion-detection`
   the deterministic-first parser, audit trail, SecOps-2k results, and
   optional local-model review.
 
+## Hugging Face
+
+Mirrored as [`mbitai/secops-2k`](https://huggingface.co/datasets/mbitai/secops-2k)
+(`tight` + `loose`, 2,000 rows each).
+
+```python
+from datasets import load_dataset
+tight = load_dataset("mbitai/secops-2k", "tight")
+loose = load_dataset("mbitai/secops-2k", "loose")
+```
+
 ## One-command run
 
 ```bash
